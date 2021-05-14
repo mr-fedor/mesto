@@ -7,9 +7,8 @@
     background-image: url(../../../images/btn-edit.svg);
     background-repeat: no-repeat;
     background-position: center;
-    position: absolute;
-    right: -28px;
-    bottom: 7px;
+    margin-bottom: 7px;
+    margin-left: 10px;
     transition: opacity .3s ease;
 }
 
@@ -19,8 +18,6 @@
 
 @media screen and (min-width: 992px){
   .profile__btn-edit{
-    right: 0;
-    bottom: 7px;
     position: relative;
     margin-left: 18px;
     width: 24px;

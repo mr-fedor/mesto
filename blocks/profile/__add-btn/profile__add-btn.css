@@ -8,6 +8,7 @@
   height: 50px;
   width: 100%;
   transition: opacity .3s ease;
+  border-radius: 2px;
 }
 
 .profile__add-btn:hover{
@@ -16,7 +17,7 @@
 
 @media screen and (min-width: 992px){
   .profile__add-btn{
-    width: 150px;
+    max-width: 150px;
     background-size: 22px;
   }
 }
