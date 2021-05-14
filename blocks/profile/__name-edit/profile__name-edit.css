@@ -1,3 +1,10 @@
 .profile__name-edit{
   position: relative;
 }
+
+@media screen and (min-width: 992px){
+  .profile__name-edit{
+    display: flex;
+    align-items: flex-end;
+  }
+}

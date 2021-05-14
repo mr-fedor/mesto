@@ -19,7 +19,10 @@
 
 @media screen and (min-width: 992px){
   .profile__btn-edit{
-    right: -42px;
+    right: 0;
+    bottom: 7px;
+    position: relative;
+    margin-left: 18px;
     width: 24px;
     height: 24px;
     background-size: 10px;
