@@ -8,6 +8,7 @@
   border: none;
   cursor: pointer;
   max-width: 22px;
+  flex: 0 0 22px;
   width: 100%;
   height: 19px;
   margin-left: 20px;
