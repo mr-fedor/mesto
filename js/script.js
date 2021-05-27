@@ -25,27 +25,45 @@ const initialCards = [
   }
 ];
 
-let popup = document.querySelector('.popup');
-let profileName = document.querySelector('.profile__name');
-let profileStatus = document.querySelector('.profile__status');
+// profile text fields
+const profileName = document.querySelector('.profile__name');
+const profileStatus = document.querySelector('.profile__status');
 
-let formElement = document.querySelector('.form');
-let nameInput = formElement.querySelector('#name');
-let jobInput = formElement.querySelector('#status');
+// form edit profile
+const formEditElement = document.querySelector('.form_type_edit');
+const nameInput = formEditElement.querySelector('#name');
+const jobInput = formEditElement.querySelector('#status');
 
-let btnOpenPopup = document.querySelector('.profile__btn-edit');
-let btnClosePopup = document.querySelector('.popup__close');
+// form add new card
+const formNewCardElement = document.querySelector('.form_type_new-card');
+const titleInput = formNewCardElement.querySelector('#title');
+const linkInput = formNewCardElement.querySelector('#link');
 
+// cards
 const cards = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#card').content;
 
-function openPopup(){
+// popups
+const popupEdit = document.querySelector('.popup_type_edit');
+const popupAdd = document.querySelector('.popup_type_new-card');
+
+// popups open btn
+const btnOpenPopupEdit = document.querySelector('.profile__btn-edit');
+const btnOpenPopupAdd = document.querySelector('.profile__add-btn');
+
+// popups close btn
+const btnClosePopupEdit = popupEdit.querySelector('.popup__close');
+const btnClosePopupAdd = popupAdd.querySelector('.popup__close');
+
+function openPopup(popup){
   popup.classList.add('popup_opened');
 
-  fillFieldFormEdit();
+  if(popup === popupEdit){
+    fillFieldFormEdit();
+  }
 }
 
-function closePopup(){
+function closePopup(popup){
   popup.classList.remove('popup_opened');
 }
 
@@ -54,10 +72,8 @@ function fillFieldFormEdit(){
   jobInput.value = profileStatus.textContent;
 }
 
-/**
- * update name/status from form
- */
-function formSubmitHandler (evt) {
+// update name/status from form Edit Profile
+function formEditSubmitHandler (evt) {
   evt.preventDefault();
 
   let statusValue = jobInput.value;
@@ -66,20 +82,49 @@ function formSubmitHandler (evt) {
   profileName.textContent = nameValue;
   profileStatus.textContent = statusValue;
 
-  closePopup();
+  closePopup(popupEdit);
 }
 
-formElement.addEventListener('submit', formSubmitHandler);
-btnOpenPopup.addEventListener('click', openPopup);
-btnClosePopup.addEventListener('click', closePopup);
+// add new card from form
+function formNewCardSubmitHandler(evt){
+  evt.preventDefault();
+  addNewCard(titleInput.value, linkInput.value, 'prepend');
 
-/**
- * add cards on page
- */
-initialCards.forEach((item) => {
+  closePopup(popupAdd);
+}
+
+function addNewCard(name, link, position = 'append'){
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-  cardElement.querySelector('.card__img').src = item.link;
-  cardElement.querySelector('.card__img').alt = item.name;
-  cardElement.querySelector('.card__title').textContent = item.name;
-  cards.append(cardElement);
+  cardElement.querySelector('.card__img').src = link;
+  cardElement.querySelector('.card__img').alt = name;
+  cardElement.querySelector('.card__title').textContent = name;
+
+  if(position === 'append'){
+    cards.append(cardElement);
+  }
+
+  if(position === 'prepend'){
+    cards.prepend(cardElement);
+  }
+
+  cardElement.querySelector('.card__btn-like').addEventListener('click',likeCard);
+}
+
+function likeCard(evt){
+  evt.target.classList.toggle('card__btn-like_active');
+}
+
+// add default cards on page
+initialCards.forEach((item) => {
+  addNewCard(item.name, item.link);
 });
+
+// submit forms
+formEditElement.addEventListener('submit', formEditSubmitHandler);
+formNewCardElement.addEventListener('submit', formNewCardSubmitHandler);
+
+// open/close popups
+btnOpenPopupEdit.addEventListener('click', () => openPopup(popupEdit));
+btnOpenPopupAdd.addEventListener('click', () => openPopup(popupAdd));
+btnClosePopupEdit.addEventListener('click', () => closePopup(popupEdit));
+btnClosePopupAdd.addEventListener('click', () => closePopup(popupAdd));
