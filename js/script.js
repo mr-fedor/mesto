@@ -108,10 +108,15 @@ function addNewCard(name, link, position = 'append'){
   }
 
   cardElement.querySelector('.card__btn-like').addEventListener('click',likeCard);
+  cardElement.querySelector('.card__btn-trash').addEventListener('click',trashCard);
 }
 
 function likeCard(evt){
   evt.target.classList.toggle('card__btn-like_active');
+}
+
+function trashCard(evt){
+  evt.target.closest('.card').remove();
 }
 
 // add default cards on page
