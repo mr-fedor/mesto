@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 // profile text fields
 const profileName = document.querySelector('.profile__name');
 const profileStatus = document.querySelector('.profile__status');
@@ -44,7 +17,7 @@ const cards = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#card').content;
 
 // figure
-const figureTemplate = document.querySelector('#popup-figure').content;
+const figurePopup = document.querySelector('.popup__figure');
 
 // popups
 const popupEdit = document.querySelector('.popup_type_edit');
@@ -62,18 +35,10 @@ const btnClosePopupImg = popupImg.querySelector('.popup__close');
 
 function openPopup(popup){
   popup.classList.add('popup_opened');
-
-  if(popup === popupEdit){
-    fillFieldFormEdit();
-  }
 }
 
 function closePopup(popup){
   popup.classList.remove('popup_opened');
-
-  if(popup === popupImg){
-    popup.querySelector('.popup__figure').remove();
-  }
 }
 
 function fillFieldFormEdit(){
@@ -82,14 +47,16 @@ function fillFieldFormEdit(){
 }
 
 function openPopupImage(popupImg, name, link){
-  const figureElement = figureTemplate.querySelector('.popup__figure').cloneNode(true);
-  figureElement.querySelector('.popup__image').src = link;
-  figureElement.querySelector('.popup__image').alt = name;
-  figureElement.querySelector('.popup__caption').textContent = name;
-
-  popupImg.querySelector('.popup__container').append(figureElement);
+  figurePopup.querySelector('.popup__image').src = link;
+  figurePopup.querySelector('.popup__image').alt = name;
+  figurePopup.querySelector('.popup__caption').textContent = name;
 
   openPopup(popupImg);
+}
+
+function openPopupEdit(popupEdit) {
+  fillFieldFormEdit();
+  openPopup(popupEdit)
 }
 
 // update name/status from form Edit Profile
@@ -153,7 +120,7 @@ formEditElement.addEventListener('submit', formEditSubmitHandler);
 formNewCardElement.addEventListener('submit', formNewCardSubmitHandler);
 
 // open popups
-btnOpenPopupEdit.addEventListener('click', () => openPopup(popupEdit));
+btnOpenPopupEdit.addEventListener('click', () => openPopupEdit(popupEdit));
 btnOpenPopupAdd.addEventListener('click', () => openPopup(popupAdd));
 
 // close popups
