@@ -40,10 +40,16 @@
       <div class="popup__container">
         <button class="popup__close" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form action="#" class="form form_type_edit" method="POST" name="edit">
+        <form action="#" class="form form_type_edit" method="POST" name="edit" novalidate>
           <fieldset class="form__input-container">
-            <input type="text" class="form__item" id="name" name="name" placeholder="Имя" required>
-            <input type="text" class="form__item" id="status" name="status" placeholder="Статус" required>
+            <label for="name-input" class="form__field">
+              <input type="text" class="form__item" id="name-input" name="name" placeholder="Имя" required id="name-input" minlength="2" maxlength="40">
+              <span class="form__item-error name-input-error"></span>
+            </label>
+            <label for="status-input" class="form__field">
+              <input type="text" class="form__item" id="status-input" name="status" placeholder="Статус" required minlength="2" maxlength="400">
+              <span class="form__item-error status-input-error"></span>
+            </label>
           </fieldset>
           <fieldset class="form__handlers">
             <input type="submit" class="form__button" value="Сохранить">
@@ -56,10 +62,16 @@
       <div class="popup__container">
         <button class="popup__close" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form action="#" class="form form_type_new-card" method="POST" name="new-card">
+        <form action="#" class="form form_type_new-card" method="POST" name="new-card" novalidate>
           <fieldset class="form__input-container">
-            <input type="text" class="form__item" id="title" name="title" placeholder="Название" required>
-            <input type="text" class="form__item" id="link" name="link" placeholder="Ссылка на картинку" required>
+            <label for="title-input" class="form__field">
+              <input type="text" class="form__item" id="title-input" name="title" placeholder="Название" required minlength="2" maxlength="30">
+              <span class="form__item-error title-input-error"></span>
+            </label>
+            <label for="link-input" class="form__field">
+              <input type="url" class="form__item" id="link-input" name="link" placeholder="Ссылка на картинку" required>
+              <span class="form__item-error link-input-error"></span>
+            </label>
           </fieldset>
           <fieldset class="form__handlers">
             <input type="submit" class="form__button" value="Создать">
@@ -92,6 +104,7 @@
 
   <script src="./js/initial-сards.js"></script>
   <script src="./js/script.js"></script>
+  <script src="./js/validate.js"></script>
 </body>
 
 </html>

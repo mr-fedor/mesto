@@ -1,0 +1,11 @@
+.form__item-error{
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 3px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s ease;
+}

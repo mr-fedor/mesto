@@ -4,13 +4,13 @@ const profileStatus = document.querySelector('.profile__status');
 
 // form edit profile
 const formEditElement = document.querySelector('.form_type_edit');
-const nameInput = formEditElement.querySelector('#name');
-const jobInput = formEditElement.querySelector('#status');
+const nameInput = formEditElement.querySelector('#name-input');
+const jobInput = formEditElement.querySelector('#status-input');
 
 // form add new card
 const formNewCardElement = document.querySelector('.form_type_new-card');
-const titleInput = formNewCardElement.querySelector('#title');
-const linkInput = formNewCardElement.querySelector('#link');
+const titleInput = formNewCardElement.querySelector('#title-input');
+const linkInput = formNewCardElement.querySelector('#link-input');
 
 // cards
 const cards = document.querySelector('.cards');
@@ -33,20 +33,20 @@ const btnClosePopupEdit = popupEdit.querySelector('.popup__close');
 const btnClosePopupAdd = popupAdd.querySelector('.popup__close');
 const btnClosePopupImg = popupImg.querySelector('.popup__close');
 
-function openPopup(popup){
+const openPopup = (popup) => {
   popup.classList.add('popup_opened');
 }
 
-function closePopup(popup){
+const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
 }
 
-function fillFieldFormEdit(){
+const fillFieldFormEdit = () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
 }
 
-function openPopupImage(popupImg, name, link){
+const openPopupImage = (popupImg, name, link) => {
   figurePopup.querySelector('.popup__image').src = link;
   figurePopup.querySelector('.popup__image').alt = name;
   figurePopup.querySelector('.popup__caption').textContent = name;
@@ -54,15 +54,14 @@ function openPopupImage(popupImg, name, link){
   openPopup(popupImg);
 }
 
-function openPopupEdit(popupEdit) {
+const openPopupEdit = (popupEdit) => {
   fillFieldFormEdit();
   openPopup(popupEdit)
 }
 
 // update name/status from form Edit Profile
-function formEditSubmitHandler (evt) {
+const formEditSubmitHandler = (evt) => {
   evt.preventDefault();
-
   let statusValue = jobInput.value;
   let nameValue = nameInput.value;
 
@@ -73,8 +72,9 @@ function formEditSubmitHandler (evt) {
 }
 
 // add new card from form
-function formNewCardSubmitHandler(evt){
+const formNewCardSubmitHandler = (evt) => {
   evt.preventDefault();
+
   addNewCard(titleInput.value, linkInput.value, 'prepend');
 
   titleInput.value = '';
@@ -83,7 +83,7 @@ function formNewCardSubmitHandler(evt){
   closePopup(popupAdd);
 }
 
-function addNewCard(name, link, position = 'append'){
+const addNewCard = (name, link, position = 'append') => {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   cardElement.querySelector('.card__img').src = link;
   cardElement.querySelector('.card__img').alt = name;
@@ -102,11 +102,11 @@ function addNewCard(name, link, position = 'append'){
   cardElement.querySelector('.card__btn-trash').addEventListener('click',trashCard);
 }
 
-function likeCard(evt){
+const likeCard = (evt) => {
   evt.target.classList.toggle('card__btn-like_active');
 }
 
-function trashCard(evt){
+const trashCard = (evt) => {
   evt.target.closest('.card').remove();
 }
 
@@ -114,6 +114,9 @@ function trashCard(evt){
 initialCards.forEach((item) => {
   addNewCard(item.name, item.link);
 });
+
+// fill fields form "edit profile"
+fillFieldFormEdit();
 
 // submit forms
 formEditElement.addEventListener('submit', formEditSubmitHandler);
