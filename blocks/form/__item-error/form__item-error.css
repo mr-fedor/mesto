@@ -7,5 +7,4 @@
   top: calc(100% + 3px);
   opacity: 0;
   visibility: hidden;
-  transition: opacity .3s ease;
 }

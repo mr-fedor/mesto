@@ -37,8 +37,8 @@ const btnClosePopupAdd = popupAdd.querySelector('.popup__close');
 const btnClosePopupImg = popupImg.querySelector('.popup__close');
 
 const openPopup = (popup) => {
-  popup.addEventListener('mousedown', closePopupByOverlay)
-  document.addEventListener('keydown', closePopupByEsc)
+  popup.addEventListener('mousedown', closePopupByOverlay);
+  document.addEventListener('keydown', closePopupByEsc);
   popup.classList.add('popup_opened');
 };
 
