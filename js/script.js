@@ -34,11 +34,17 @@ const btnClosePopupAdd = popupAdd.querySelector('.popup__close');
 const btnClosePopupImg = popupImg.querySelector('.popup__close');
 
 const openPopup = (popup) => {
+  popup.addEventListener('click', (evt) => closePopupByOverlay(evt))
   popup.classList.add('popup_opened');
 }
 
 const closePopup = (popup) => {
+  popup.removeEventListener('click', (evt) => closePopupByOverlay(evt))
   popup.classList.remove('popup_opened');
+}
+
+const closePopupByOverlay = (evt) => {
+  closePopup(evt.target);
 }
 
 const fillFieldFormEdit = () => {
