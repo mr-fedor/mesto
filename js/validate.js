@@ -17,7 +17,7 @@ const checkInputValidity = (formElement, inputElement, config) => {
     showInputError(formElement, inputElement, inputElement.validationMessage, config);
   } else {
     hideInputError(formElement, inputElement, config);
-  }
+  };
 };
 
 const hasInvalidInput = (inputList) => {
@@ -33,7 +33,7 @@ const toggleButtonState = (inputList, buttonElement, config) => {
   } else {
     buttonElement.classList.remove(config.inactiveButtonClass);
     buttonElement.removeAttribute('disabled');
-  }
+  };
 };
 
 const setEventListeners = (formElement, config) => {
