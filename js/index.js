@@ -1,3 +1,6 @@
+import {initialCards} from './initial-сards.js';
+import {Card} from './card.js';
+
 // profile text fields
 const profileName = document.querySelector('.profile__name');
 const profileStatus = document.querySelector('.profile__status');
@@ -15,7 +18,6 @@ const linkInput = formNewCardElement.querySelector('#link-input');
 
 // cards
 const cards = document.querySelector('.cards');
-const cardTemplate = document.querySelector('#card').content;
 
 // figure
 const figurePopup = document.querySelector('.popup__figure');
@@ -94,7 +96,7 @@ const handleProfileFormSubmit = (evt) => {
 const handleNewCardFormSubmit = (evt) => {
   evt.preventDefault();
 
-  addNewCard(titleInput.value, linkInput.value, 'prepend');
+  addNewCard({name: titleInput.value, link: linkInput.value}, 'prepend');
 
   formNewCardElement.reset();
   formNewCardElementBtn.classList.add('form__button_inactive');
@@ -103,8 +105,8 @@ const handleNewCardFormSubmit = (evt) => {
   closePopup(popupAdd);
 };
 
-const addNewCard = (name, link, position = 'append') => {
-  const cardElement = createCard(name, link);
+const addNewCard = (card, position = 'append') => {
+  const cardElement = createCard(card);
 
   if(position === 'append'){
     cards.append(cardElement);
@@ -115,32 +117,18 @@ const addNewCard = (name, link, position = 'append') => {
   };
 };
 
-const createCard = (name, link) => {
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-  const cardElementImg = cardElement.querySelector('.card__img');
+const createCard = (item) => {
+  const card = new Card(item, '#card');
+  const cardElement = card.generateCard();
 
-  cardElementImg.src = link;
-  cardElementImg.alt = name;
-  cardElement.querySelector('.card__title').textContent = name;
-
-  cardElementImg.addEventListener('click', () => openPopupImage(popupImg, name, link));
-  cardElement.querySelector('.card__btn-like').addEventListener('click',likeCard);
-  cardElement.querySelector('.card__btn-trash').addEventListener('click',trashCard);
+  cardElement.querySelector('.card__img').addEventListener('click', () => openPopupImage(popupImg, item.name, item.link));
 
   return cardElement;
 }
 
-const likeCard = (evt) => {
-  evt.target.classList.toggle('card__btn-like_active');
-};
-
-const trashCard = (evt) => {
-  evt.target.closest('.card').remove();
-};
-
 // add default cards on page
-initialCards.forEach((item) => {
-  addNewCard(item.name, item.link);
+initialCards.forEach((card) => {
+  addNewCard(card);
 });
 
 // fill fields form "edit profile"
