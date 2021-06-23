@@ -171,15 +171,11 @@ initialCards.forEach((card) => {
 fillFieldFormEdit();
 
 //validate forms
-const enableValidationForms = (config) => {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
-  formList.forEach((formElement) => {
-    const FormValid = new FormValidator(config, formElement);
-    return FormValid.enableValidation();
-  });
-};
+const formEditProfile = new FormValidator(config, formEditElement);
+formEditProfile.enableValidation();
 
-enableValidationForms(config);
+const formAddCard = new FormValidator(config, formNewCardElement);
+formAddCard.enableValidation();
 
 // submit forms
 formEditElement.addEventListener('submit', handleProfileFormSubmit);
