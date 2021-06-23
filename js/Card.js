@@ -37,7 +37,7 @@ class Card {
   }
 
   _likeCard(){
-    this._element.classList.toggle('card__btn-like_active');
+    this._element.querySelector('.card__btn-like').classList.toggle('card__btn-like_active');
   }
 
   _trashCard(){
