@@ -5,8 +5,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body>
@@ -17,7 +15,7 @@
     <main class="main container">
       <section class="profile">
         <div class="profile__content">
-          <img src="./images/profile__avatar.jpeg" alt="Жак-Ив Кусто" class="profile__avatar">
+          <img src="<%= require('./images/profile__avatar.jpeg') %>" alt="Жак-Ив Кусто" class="profile__avatar">
           <div class="profile__info">
             <div class="profile__name-edit">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -65,7 +63,7 @@
         <form action="#" class="form form_type_new-card" method="POST" name="new-card" novalidate>
           <fieldset class="form__input-container">
             <label for="title-input" class="form__field">
-              <input type="text" class="form__item" id="title-input" name="title" placeholder="Название" required minlength="2" maxlength="30">
+              <input type="text" class="form__item" id="title-input" name="name" placeholder="Название" required minlength="2" maxlength="30">
               <span class="form__item-error title-input-error"></span>
             </label>
             <label for="link-input" class="form__field">
@@ -101,8 +99,6 @@
       </article>
     </template>
   </div>
-
-  <script type="module" src="./js/index.js"></script>
 </body>
 
 </html>
