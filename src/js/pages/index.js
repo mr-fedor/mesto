@@ -27,6 +27,7 @@ import {
 const formEditElement = document.querySelector(formEditProfileSelector);
 const formNewCardElement = document.querySelector(formAddCardSelector);
 const popupWithImageClass = new PopupWithImage(popupWithImageSelector);
+popupWithImageClass.setEventListeners();
 const userInfo = new UserInfo({nameSelector: profileNameSelector, statusSelector: profileStatusSelector});
 
 const fillFieldFormEdit = () => {
@@ -42,6 +43,7 @@ const popupFormEditProfile = new PopupWithForm({
     popupFormEditProfile.close();
   }
 });
+popupFormEditProfile.setEventListeners();
 
 const popupFormAddCard = new PopupWithForm({
   popupSelector: popupAddCardSelector,
@@ -50,6 +52,7 @@ const popupFormAddCard = new PopupWithForm({
     popupFormAddCard.close();
   },
 });
+popupFormAddCard.setEventListeners();
 
 const defaultCardList = new Section({
   items: initialCards,
@@ -85,20 +88,14 @@ formAddCard.enableValidation();
 btnOpenPopupEdit.addEventListener('click', () => {
   fillFieldFormEdit();
 
-  const formElements = Array.from(formEditElement.querySelectorAll('.form__item'));
-  formElements.forEach(element => {
-    formEditProfile.hideInputError(element);
-  });
+  formEditProfile.hideInputErrors();
   formEditProfile.toggleButtonState();
 
   popupFormEditProfile.open();
 });
 
 btnOpenPopupAdd.addEventListener('click', () => {
-  const formElements = Array.from(formNewCardElement.querySelectorAll('.form__item'));
-  formElements.forEach(element => {
-    formAddCard.hideInputError(element);
-  });
+  formAddCard.hideInputErrors();
   formAddCard.toggleButtonState();
 
   popupFormAddCard.open();
