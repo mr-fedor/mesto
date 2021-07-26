@@ -30,4 +30,14 @@ export default class Popup{
     this._popup.querySelector('.popup__close').addEventListener('click', () => this.close());
     this._popup.addEventListener('mousedown', this._closeOverlay);
   }
+
+  renderLoading(isLoading){
+    this._popupFormBtn = this._popup.querySelector('.form__button');
+    if(isLoading){
+      this._popupDefaultBtnText = this._popupFormBtn.value;
+      this._popupFormBtn.value = 'Сохранение...';
+    } else {
+      this._popupFormBtn.value = this._popupDefaultBtnText;
+    }
+  }
 }

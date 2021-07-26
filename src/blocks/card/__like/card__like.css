@@ -1,0 +1,6 @@
+.card__like{
+  margin-left: 20px;
+  max-width: 22px;
+  flex: 0 0 22px;
+  text-align: center;
+}

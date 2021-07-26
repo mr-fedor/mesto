@@ -15,7 +15,10 @@
     <main class="main container">
       <section class="profile">
         <div class="profile__content">
-          <img src="<%= require('./images/profile__avatar.jpeg') %>" alt="Жак-Ив Кусто" class="profile__avatar">
+          <div class="profile__avatar-container">
+              <img src="<%= require('./images/profile__avatar.jpeg') %>" alt="Жак-Ив Кусто" class="profile__avatar">
+              <button type="button" class="profile__avatar-edit"></button>
+          </div>
           <div class="profile__info">
             <div class="profile__name-edit">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -47,6 +50,24 @@
             <label for="status-input" class="form__field">
               <input type="text" class="form__item" id="status-input" name="status" placeholder="Статус" required minlength="2" maxlength="400">
               <span class="form__item-error status-input-error"></span>
+            </label>
+          </fieldset>
+          <fieldset class="form__handlers">
+            <input type="submit" class="form__button" value="Сохранить">
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_type_add-avatar">
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form action="#" class="form form_type_add-avatar" method="POST" name="edit" novalidate>
+          <fieldset class="form__input-container">
+            <label for="link-avatar" class="form__field">
+              <input type="url" class="form__item" id="link-avatar" name="link-avatar" placeholder="Ссылка на аватар" required>
+              <span class="form__item-error link-avatar-error"></span>
             </label>
           </fieldset>
           <fieldset class="form__handlers">
@@ -88,13 +109,28 @@
       </div>
     </div>
 
+    <div class="popup popup_type_delete-card">
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__title popup__title_type_delete-card">Вы уверены?</h2>
+        <form action="#" class="form form_type_delete-card" method="POST" name="delete-card" novalidate>
+          <fieldset class="form__handlers">
+            <input type="submit" class="form__button" value="Да">
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
     <template id="card">
       <article class="card">
         <img class="card__img">
         <button class="card__btn-trash" type="button"></button>
         <div class="card__footer">
           <h3 class="card__title"></h3>
-          <button class="card__btn-like" type="button"></button>
+          <div class="card__like">
+            <button class="card__btn-like" type="button"></button>
+            <span class="card__count-like"></span>
+          </div>
         </div>
       </article>
     </template>
