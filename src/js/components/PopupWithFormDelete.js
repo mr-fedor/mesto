@@ -1,8 +1,8 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithFormDelete extends Popup{
-  constructor({popupSelector, handleSubmitForm}){
-    super(popupSelector);
+  constructor({popupElement, handleSubmitForm}){
+    super(popupElement);
     this._handleSubmitForm = handleSubmitForm;
     this._formElement = this._popup.querySelector('.form');
   }
@@ -15,5 +15,15 @@ export default class PopupWithFormDelete extends Popup{
   open(card){
     super.open();
     this.card = card;
+  }
+
+  renderLoading(isLoading){
+    this._popupFormBtn = this._formElement.querySelector('.form__button');
+    if(isLoading){
+      this._popupDefaultBtnText = this._popupFormBtn.textContent;
+      this._popupFormBtn.textContent = 'Удаление...';
+    } else {
+      // this._popupFormBtn.textContent = this._popupDefaultBtnText;
+    }
   }
 }
