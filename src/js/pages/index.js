@@ -35,6 +35,12 @@ import {
 let userId = null;
 const userInfo = new UserInfo({nameSelector: profileNameSelector, statusSelector: profileStatusSelector, avatarSelector: profileAvatarSelector});
 
+const defaultCardList = new Section({
+  renderer: (item) => {
+    defaultCardList.addItem(createCard(item));
+  }
+}, cardsListSelector);
+
 const api = new Api(optionsApi);
 api.getUserInfo().then(res => {
   userInfo.setUserAvatar(res.avatar);
@@ -43,18 +49,12 @@ api.getUserInfo().then(res => {
     status: res.about,
   });
   userId = res._id;
-});
 
-const defaultCardList = new Section({
-  renderer: (item) => {
-    defaultCardList.addItem(createCard(item));
-  }
-}, cardsListSelector);
-
-api.getInitialCards().then(res => {
-  defaultCardList.renderItems(res);
-}).catch((err) => {
-  console.log(err); // выведем ошибку в консоль
+  api.getInitialCards().then(res => {
+    defaultCardList.renderItems(res);
+  }).catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
 });
 
 const formEditElement = document.querySelector(formEditProfileSelector);
