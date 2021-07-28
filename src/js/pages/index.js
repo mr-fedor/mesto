@@ -49,7 +49,9 @@ api.getUserInfo().then(res => {
     status: res.about,
   });
   userId = res._id;
-
+}).catch((err) => {
+  console.log(err); // выведем ошибку в консоль
+}).finally(() => {
   api.getInitialCards().then(res => {
     defaultCardList.renderItems(res);
   }).catch((err) => {
